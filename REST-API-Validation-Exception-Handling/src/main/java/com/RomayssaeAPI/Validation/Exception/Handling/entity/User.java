@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@AllArgsConstructor
+@AllArgsConstructor (staticName = "build")
 @NoArgsConstructor
 @Builder
-@Table(name = "USERS_TBL")
+@Table
 public class User  {
 
     @Id
