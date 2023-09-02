@@ -29,7 +29,7 @@ public class UserService {
         return repository.findAll();
       }
 
-      public User getUser(Long id){
+    public User getUser(int id){
         return repository.findByUserId(id);
-      }
+    }
 }

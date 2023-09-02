@@ -3,6 +3,7 @@ package com.RomayssaeAPI.Validation.Exception.Handling.controller;
 import com.RomayssaeAPI.Validation.Exception.Handling.dto.UserRequest;
 import com.RomayssaeAPI.Validation.Exception.Handling.entity.User;
 import com.RomayssaeAPI.Validation.Exception.Handling.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ public class UserController {
     private UserService service;
 
      @PostMapping("/signUp")
-    public ResponseEntity<User> saveUser(@RequestBody UserRequest userRequest){
+    public ResponseEntity<User> saveUser(@RequestBody @Valid UserRequest userRequest){
         return  new ResponseEntity<>(service.saveUser(userRequest), HttpStatus.CREATED);
     }
 
@@ -29,7 +30,7 @@ public class UserController {
         }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id){
+    public ResponseEntity<User> getUser(@PathVariable int id){
          return ResponseEntity.ok(service.getUser(id));
     }
 
