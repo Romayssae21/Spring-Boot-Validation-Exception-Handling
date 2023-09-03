@@ -27,7 +27,7 @@ public class AppExceptionHandler {
     @ExceptionHandler(UserIdNotFoundException.class)
     public Map<String,String> handleBusinessException(UserIdNotFoundException exception){
         Map<String,String> errorMap = new HashMap<>();
-        errorMap.put("Eroor message",exception.getMessage());
+        errorMap.put("Error message",exception.getMessage());
         return errorMap;
 
     }
