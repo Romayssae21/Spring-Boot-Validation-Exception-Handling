@@ -12,6 +12,7 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class AppExceptionHandler {
+    //Validate input
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String,String> handleInvalidArgument(MethodArgumentNotValidException exception){
@@ -20,6 +21,15 @@ public class AppExceptionHandler {
             errorMap.put(error.getField(),error.getDefaultMessage());
         });
         return errorMap;
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(UserIdNotFoundException.class)
+    public Map<String,String> handleBusinessException(UserIdNotFoundException exception){
+        Map<String,String> errorMap = new HashMap<>();
+        errorMap.put("Eroor message",exception.getMessage());
+        return errorMap;
+
     }
 
 }

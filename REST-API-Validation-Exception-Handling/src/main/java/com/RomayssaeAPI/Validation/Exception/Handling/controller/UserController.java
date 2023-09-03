@@ -3,6 +3,7 @@ package com.RomayssaeAPI.Validation.Exception.Handling.controller;
 import com.RomayssaeAPI.Validation.Exception.Handling.dto.UserRequest;
 import com.RomayssaeAPI.Validation.Exception.Handling.entity.User;
 import com.RomayssaeAPI.Validation.Exception.Handling.service.UserService;
+import exceptionHandler.UserIdNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -21,7 +22,7 @@ public class UserController {
 
      @PostMapping("/signUp")
     public ResponseEntity<User> saveUser(@RequestBody @Valid UserRequest userRequest){
-        return  new ResponseEntity<>(service.saveUser(userRequest), HttpStatus.CREATED);
+        return  new ResponseEntity <>(service.saveUser(userRequest), HttpStatus.CREATED);
     }
 
     @GetMapping("fetchAllUsers")
@@ -30,7 +31,7 @@ public class UserController {
         }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable int id){
+    public ResponseEntity<User> getUser(@PathVariable int id) throws UserIdNotFoundException {
          return ResponseEntity.ok(service.getUser(id));
     }
 

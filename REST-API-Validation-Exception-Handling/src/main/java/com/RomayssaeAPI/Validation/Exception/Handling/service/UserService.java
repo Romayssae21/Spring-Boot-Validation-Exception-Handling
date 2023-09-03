@@ -3,6 +3,7 @@ package com.RomayssaeAPI.Validation.Exception.Handling.service;
 import com.RomayssaeAPI.Validation.Exception.Handling.dto.UserRequest;
 import com.RomayssaeAPI.Validation.Exception.Handling.entity.User;
 import com.RomayssaeAPI.Validation.Exception.Handling.repository.UserRepository;
+import exceptionHandler.UserIdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,13 @@ public class UserService {
         return repository.findAll();
       }
 
-    public User getUser(int id){
-        return repository.findByUserId(id);
+    public User getUser(int id) throws UserIdNotFoundException {
+        User user = repository.findByUserId(id);
+        if (user != null){
+            return user;
+        }
+        else {
+            throw new UserIdNotFoundException("User not found for id = "+id);
+        }
     }
 }
